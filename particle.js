@@ -6,16 +6,10 @@ export class Particle {
     this.vx = Math.random() * speed - speed;
     this.vy = Math.random() * speed - speed;
 
-    const diameter = this.radius * 2;
-
     // 화면 안 일정 구역에 x,y 랜덤 배치
     this.minLength = Math.min(stageWidth, stageHeight);
-    this.x =
-      stageWidth * 0.5 -
-      this.minLength / 12 +
-      (Math.random() * this.minLength) / 6;
-    this.y =
-      stageHeight - this.minLength / 3 + (Math.random() * this.minLength) / 6;
+    this.x = stageWidth * 0.5 - this.minLength / 12 + (Math.random() * this.minLength) / 6;
+    this.y = stageHeight - this.minLength / 3 + (Math.random() * this.minLength) / 6;
   }
 
   draw(ctx, stageWidth, stageHeight, color, mouseX, mouseY) {

@@ -43,7 +43,6 @@ class App {
   }
 
   animate(t) {
-    window.requestAnimationFrame(this.animate.bind(this));
     this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight); //생성하기 전에 이전 프레임 지워줌
 
     this.minLength = Math.min(this.stageWidth, this.stageHeight);
@@ -53,24 +52,14 @@ class App {
       this.stageWidth * 0.5 - this.minLength / 8,
       this.stageHeight - this.minLength / 8,
       this.minLength / 4,
-      this.minLength / 8
+      this.minLength / 8,
     );
     console.log(this.clicked);
 
     if (this.onClicked) {
-      this.onClicked = this.body.click_draw(
-        this.ctx,
-        this.stageWidth,
-        this.stageHeight,
-        "orange"
-      );
+      this.onClicked = this.body.click_draw(this.ctx, this.stageWidth, this.stageHeight, "orange");
     } else {
-      this.body.init_draw(
-        this.ctx,
-        this.stageWidth,
-        this.stageHeight,
-        "orange"
-      );
+      this.body.init_draw(this.ctx, this.stageWidth, this.stageHeight, "orange");
     }
 
     this.ctx.fillStyle = "black";
@@ -78,23 +67,20 @@ class App {
       this.stageWidth * 0.5 - this.minLength / 8,
       this.stageHeight - this.minLength / 8,
       this.minLength / 4,
-      this.minLength / 8
+      this.minLength / 8,
     );
 
     if (this.clicked) {
-      this.particles.draw(
-        this.ctx,
-        this.stageWidth,
-        this.stageHeight,
-        this.mouseX,
-        this.mouseY
-      );
+      this.particles.draw(this.ctx, this.stageWidth, this.stageHeight, this.mouseX, this.mouseY);
     }
+
+    window.requestAnimationFrame(this.animate.bind(this));
   }
 
   onClick(e) {
     this.onClicked = true;
     this.clicked = true;
+    this.particles.addParticle(10);
   }
 
   onDown(e) {
