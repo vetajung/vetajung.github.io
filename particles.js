@@ -2,25 +2,27 @@ import { Particle } from "./particle.js";
 
 export class Particles {
   constructor(stageWidth, stageHeight) {
-    this.totalParticles = 30;
-
-    this.color = [
-      "rgba(0,199,235,0.4)",
-      "rgba(0,146,199,0.4)",
-      "rgba(0,87,158,0.4",
-    ];
-
     this.particles = [];
+    this.color = ["rgba(0,199,235,0.4)", "rgba(0,146,199,0.4)", "rgba(0,87,158,0.4"];
+    this.totalParticles = 0;
+    this.stageHeight = stageHeight;
+    this.stageWidth = stageWidth;
 
-    for (let i = 0; i < this.totalParticles; i++) {
+    this.addParticle(20);
+  }
+
+  addParticle(count) {
+    for (let i = 0; i < count; i++) {
       const particle = new Particle(
-        stageWidth,
-        stageHeight,
-        Math.min(stageWidth, stageHeight) / 50,
-        2
+        this.stageWidth,
+        this.stageHeight,
+        Math.min(this.stageWidth, this.stageHeight) / 50,
+        2,
       );
-      this.particles[i] = particle;
+      this.particles.push(particle);
     }
+
+    this.totalParticles += count;
   }
 
   draw(ctx, stageWidth, stageHeight, mouseX, mouseY) {
