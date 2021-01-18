@@ -10,7 +10,6 @@ class App {
 
     this.clicked = false;
     this.onClicked = false;
-    this.isDown = false;
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
@@ -22,9 +21,7 @@ class App {
 
     this.minLength = 0;
 
-    document.addEventListener("pointerdown", this.onDown.bind(this), false);
     document.addEventListener("pointermove", this.onMove.bind(this), false);
-    document.addEventListener("pointerup", this.onUp.bind(this), false);
 
     this.particles = new Particles(this.stageWidth, this.stageHeight);
 
@@ -52,14 +49,24 @@ class App {
       this.stageWidth * 0.5 - this.minLength / 8,
       this.stageHeight - this.minLength / 8,
       this.minLength / 4,
-      this.minLength / 8,
+      this.minLength / 8
     );
     console.log(this.clicked);
 
     if (this.onClicked) {
-      this.onClicked = this.body.click_draw(this.ctx, this.stageWidth, this.stageHeight, "orange");
+      this.onClicked = this.body.click_draw(
+        this.ctx,
+        this.stageWidth,
+        this.stageHeight,
+        "orange"
+      );
     } else {
-      this.body.init_draw(this.ctx, this.stageWidth, this.stageHeight, "orange");
+      this.body.init_draw(
+        this.ctx,
+        this.stageWidth,
+        this.stageHeight,
+        "orange"
+      );
     }
 
     this.ctx.fillStyle = "black";
@@ -67,11 +74,17 @@ class App {
       this.stageWidth * 0.5 - this.minLength / 8,
       this.stageHeight - this.minLength / 8,
       this.minLength / 4,
-      this.minLength / 8,
+      this.minLength / 8
     );
 
     if (this.clicked) {
-      this.particles.draw(this.ctx, this.stageWidth, this.stageHeight, this.mouseX, this.mouseY);
+      this.particles.draw(
+        this.ctx,
+        this.stageWidth,
+        this.stageHeight,
+        this.mouseX,
+        this.mouseY
+      );
     }
 
     window.requestAnimationFrame(this.animate.bind(this));
@@ -80,22 +93,12 @@ class App {
   onClick(e) {
     this.onClicked = true;
     this.clicked = true;
-    this.particles.addParticle(10);
-  }
-
-  onDown(e) {
-    this.isDown = true;
+    this.particles.addParticle(15);
   }
 
   onMove(e) {
-    if (this.isDown) {
-      this.mouseX = e.clientX;
-      this.mouseY = e.clientY;
-    }
-  }
-
-  onUp(e) {
-    this.isDown = false;
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
   }
 }
 
